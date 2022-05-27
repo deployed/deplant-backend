@@ -6,27 +6,27 @@ import { SunDemand } from '../constants';
 
 class CreateFlowerDto {
   @ApiProperty()
-  @IsString()
+  @IsString({ message: 'Is required' })
   name: string;
 
   @ApiProperty()
-  @IsString()
+  @IsString({ message: 'Is required ' })
   specie: string;
 
   @ApiProperty()
-  @IsInt()
+  @IsInt({ message: 'Must be an integer' })
   wateringIntervalInDays: number;
 
   @ApiProperty({ enum: SunDemand })
-  @IsEnum(SunDemand)
+  @IsEnum(SunDemand, { message: 'Must be of SunDemand enum type' })
   sunDemand: SunDemand;
 
   @ApiProperty()
-  @IsInt()
+  @IsInt({ message: 'Must be an integer' })
   room: number;
 
   @ApiProperty()
-  @IsInt()
+  @IsInt({ message: 'Must be an integer' })
   sill: number;
 
   @ApiProperty()

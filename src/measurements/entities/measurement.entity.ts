@@ -11,11 +11,17 @@ class Measurement {
   @Column({ type: 'timestamptz' })
   time: Date;
 
+  @Column({ type: 'decimal' })
+  temperature: number;
+
+  @Column({ type: 'decimal' })
+  humidity: number;
+
   @ManyToOne(() => Flower, (flower) => flower.sensor)
   flower: Flower;
 
   @ManyToOne(() => Sensor, (sensor) => sensor.measurements)
-  sensor: Flower;
+  sensor: Sensor;
 }
 
 export default Measurement;

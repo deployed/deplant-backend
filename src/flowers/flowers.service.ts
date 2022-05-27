@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import Sensor from 'src/sensors/entities/sensor.entity';
+import Watering from 'src/waterings/entities/watering.entity';
 import { DeleteResult, Repository } from 'typeorm';
 import CreateFlowerDto from './dtos/create-flower.dto';
 import Flower from './entities/flower.entity';
@@ -12,6 +13,8 @@ class FlowersService {
     private readonly flowersRepository: Repository<Flower>,
     @InjectRepository(Sensor)
     private readonly sensorsRepository: Repository<Sensor>,
+    @InjectRepository(Watering)
+    private readonly wateringRepository: Repository<Watering>,
   ) {}
 
   async getFlower(id: number): Promise<Flower> {
@@ -65,6 +68,19 @@ class FlowersService {
     }
 
     return result;
+  }
+
+  async waterFlower(flowerId: number): Promise<Watering> {
+    const flower = await this.flowersRepository.findOne(flowerId);
+    if (!flower) {
+      throw new HttpException('Flower not found', HttpStatus.NOT_FOUND);
+    }
+
+    const watering = new Watering();
+    watering.time = new Date();
+    watering.flower = flower;
+
+    return await this.wateringRepository.save(watering);
   }
 }
 

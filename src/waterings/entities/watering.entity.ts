@@ -7,7 +7,7 @@ class Watering {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column({ type: 'timestamptz' })
+  @Column({ type: 'timestamptz', default: new Date() })
   time: Date;
 
   @ManyToOne(() => Flower, (flower) => flower.waterings)

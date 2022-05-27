@@ -5,13 +5,13 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import Flower from './flowers/entities/flower.entity';
+import { FlowersModule } from './flowers/flowers.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({ autoLoadEntities: true, synchronize: true }),
-    TypeOrmModule.forFeature([Flower]),
+    FlowersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

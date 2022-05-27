@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import Plant from './plants/entities/plant.entity';
+import { SunDemand } from './flowers/constants';
+import Flower from './flowers/entities/flower.entity';
 
 @Injectable()
 export class AppService {
   constructor(
-    @InjectRepository(Plant)
-    private readonly plantRepository: Repository<Plant>,
+    @InjectRepository(Flower)
+    private readonly plantRepository: Repository<Flower>,
   ) {}
 
   getHello(): string {
@@ -15,16 +16,21 @@ export class AppService {
   }
 
   getPlants() {
-    return this.plantRepository.find();
+    return this.plantRepository.find({
+      relations: ['waterings', 'sensor', 'measurements'],
+    });
   }
 
   createPlant() {
-    const plant = new Plant();
+    const plant = new Flower();
 
-    plant.name = 'Grzegorz';
+    plant.name = 'Mariusz';
     plant.plantDate = new Date();
-    plant.specie = 'tulipan';
-    plant.daysBetweenWaters = 2;
+    plant.specie = 'goździk';
+    plant.wateringIntervalInDays = 5;
+    plant.sunDemand = SunDemand.PartialSun;
+    plant.room = 1;
+    plant.sill = 2;
 
     return this.plantRepository.save(plant);
   }

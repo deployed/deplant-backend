@@ -34,6 +34,11 @@ class FlowersController {
   deleteFlower(@Param('id', ParseIntPipe) id: number) {
     return this.flowersService.deleteFlower(id);
   }
+
+  @Post(':id/water')
+  waterFlower(@Param('id', ParseIntPipe) flowerId: number) {
+    return this.flowersService.waterFlower(flowerId);
+  }
 }
 
 export default FlowersController;

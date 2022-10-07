@@ -16,8 +16,7 @@ class FlowersController {
 
   @Get(':id')
   async getFlower(@Param('id', ParseIntPipe) id: number) {
-    const flower = await this.flowersService.getFlower(id);
-    return flower;
+    return this.flowersService.getFlower(id);
   }
 
   @Get()

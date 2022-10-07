@@ -26,6 +26,7 @@ class MeasurementsController {
 
   @Post()
   createMeasurement(@Body() createMeasurementDto: CreateMeasurementDto) {
+    console.log({ createMeasurementDto });
     return this.measurementsService.createMeasurement(createMeasurementDto);
   }
 }

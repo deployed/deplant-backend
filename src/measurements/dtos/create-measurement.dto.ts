@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { IsString, IsOptional, IsNumber } from 'class-validator';
 
-class CreateMeasurementDto {
+export class CreateMeasurementDto {
   @ApiProperty()
   @IsString({ message: 'Is required' })
   sensorMacAddress: string;

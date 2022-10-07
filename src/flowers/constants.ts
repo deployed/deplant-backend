@@ -4,3 +4,9 @@ export enum SunDemand {
   PartialSun = 'PARTIAL_SUN',
   FullSun = 'FULL_SUN',
 }
+
+export enum FlowerStatus {
+  Bad = 'BAD',
+  Ok = 'OK',
+  Well = 'WELL',
+}

@@ -29,13 +29,21 @@ class FlowersService {
       );
     }
 
+    flower.status = flower.getStatus();
+
     return flower;
   }
 
-  getFlowers() {
-    return this.flowersRepository.find({
-      relations: ['waterings'],
+  async getFlowers() {
+    const flowers = await this.flowersRepository.find({
+      relations: ['waterings', 'measurements', 'sensor'],
     });
+
+    flowers.forEach((flower) => {
+      flower.status = flower.getStatus();
+    });
+
+    return flowers;
   }
 
   async createFlower(createFlowerDto: CreateFlowerDto): Promise<Flower> {

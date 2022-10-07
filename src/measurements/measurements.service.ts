@@ -54,12 +54,12 @@ class MeasurementsService {
     });
 
     if (!sensor) {
-      throw new HttpException('Sensor not found', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Sensor not found', HttpStatus.NOT_FOUND);
     }
 
     const flower = await this.flowersRepository.findOne(sensor.flower.id);
     if (!flower) {
-      throw new HttpException('Flower not found', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Flower not found', HttpStatus.NOT_FOUND);
     }
 
     measurement.flower = flower;
